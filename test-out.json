@@ -1,0 +1,69 @@
+{
+  "verfahren": "DIN EN ISO 12213-2:2010-01 / AGA8 DETAIL",
+  "eingabedaten": {
+    "temperatur_C": 14.610000000000014,
+    "druck_bar": 30.327,
+    "intern_verwendete_temperatur_K": 287.76,
+    "intern_verwendeter_druck_kPa": 3032.7000000000003,
+    "startwert_molare_dichte_mol_pro_l": null,
+    "stoffmengenanteile_vor_normierung": {
+      "methan": 92.293,
+      "stickstoff": 0.839,
+      "kohlendioxid": 0.884,
+      "ethan": 4.411,
+      "propan": 0.928,
+      "isobutan": 0.209,
+      "n_butan": 0.186,
+      "isopentan": 0.043,
+      "n_pentan": 0.029,
+      "n_hexan": 0.044,
+      "n_heptan": 0.0,
+      "n_oktan": 0.0,
+      "n_nonan": 0.0,
+      "n_dekan": 0.0,
+      "wasserstoff": 0.0,
+      "sauerstoff": 0.0,
+      "kohlenmonoxid": 0.0,
+      "wasser": 0.0,
+      "schwefelwasserstoff": 0.0,
+      "helium": 0.0,
+      "argon": 0.0
+    },
+    "summe_vor_normierung": 99.86600000000001,
+    "stoffmengenanteile_normiert": {
+      "methan": 0.9241683856367532,
+      "stickstoff": 0.008401257685298298,
+      "kohlendioxid": 0.008851861494402499,
+      "ethan": 0.04416918671019165,
+      "propan": 0.009292451885526605,
+      "isobutan": 0.0020928043578395047,
+      "n_butan": 0.0018624957442973582,
+      "isopentan": 0.00043057697314401286,
+      "n_pentan": 0.0002903891214227064,
+      "n_hexan": 0.00044059039112410623
+    }
+  },
+  "ergebnis": {
+    "molare_masse_g_pro_mol": 17.509169532173114,
+    "molare_dichte_mol_pro_l": 1.3623334269526242,
+    "druck_kPa": 3032.700000000002,
+    "k_zahl": 0.9304198208213025,
+    "dP_dRho_kPa_pro_mol_l": 2072.7125488530673,
+    "d2P_dRho2_kPa_pro_mol_l2": -205.9198335075215,
+    "d2P_dT_dRho_kPa_pro_mol_l_K": 0.0,
+    "dP_dT_kPa_pro_K": 12.550531908680782,
+    "innere_energie_J_pro_mol": -3209.6367293647036,
+    "enthalpie_J_pro_mol": -983.5297132696887,
+    "entropie_J_pro_mol_K": -27.99894627320874,
+    "cv_J_pro_mol_K": 29.118563065781842,
+    "cp_J_pro_mol_K": 40.90137068131552,
+    "schallgeschwindigkeit_m_pro_s": 407.77512146441336,
+    "gibbs_energie_J_pro_mol": 7073.447066308859,
+    "joule_thomson_K_pro_kPa": 0.005007036313845854,
+    "isentropenexponent": 1.307859107083864
+  },
+  "status": {
+    "fehlercode": 0,
+    "meldung": ""
+  }
+}
