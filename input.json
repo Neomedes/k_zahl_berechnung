@@ -1,6 +1,6 @@
 {
-  "temperatur_C": 126.85,
-  "druck_bar": 500.0,
+  "temperatur_C": [126.85, 150.0],
+  "druck_bar": [50.0, 500.0],
   "stoffmengenanteile": {
     "methan": 77.824,
     "stickstoff": 2.0,

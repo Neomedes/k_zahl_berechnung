@@ -17,8 +17,8 @@ Aus `input.json` wird `input-out.json`, aus `test.json` wird `test-out.json`.
 
 ```json
 {
-  "temperatur_C": 126.85,
-  "druck_bar": 500.0,
+  "temperatur_C": [126.85, 150.0],
+  "druck_bar": [50.0, 500.0],
   "stoffmengenanteile": {
     "methan": 77.824,
     "stickstoff": 2.0,
@@ -47,6 +47,7 @@ Aus `input.json` wird `input-out.json`, aus `test.json` wird `test-out.json`.
 
 Die Stoffmengenanteile werden automatisch normiert. Das gilt sowohl fuer Anteile mit Summe `100` als auch fuer beliebige andere Summen ungleich `0`.
 Temperatur und Druck koennen jetzt direkt in `Grad Celsius` und `bar` angegeben werden; intern rechnet das Programm normkonform mit `K` und `kPa`.
+`temperatur_C` und `druck_bar` duerfen jeweils entweder ein Einzelwert oder ein Array sein. In der Ausgabe wird fuer jede Temperatur-Druck-Kombination ein eigener Eintrag in `ergebnisse` erzeugt.
 
 ## Test
 
