@@ -45,6 +45,17 @@ def _druck_nach_kpa(wert: float, einheit: str) -> float:
     return wert
 
 
+def _temperatur_druck_paare(
+    temperaturen: list[float], druecke: list[float]
+) -> list[tuple[float, float]]:
+    if len(temperaturen) != len(druecke):
+        raise ValueError(
+            "Temperatur und Druck müssen gleich viele Werte enthalten "
+            f"(Temperaturen: {len(temperaturen)}, Drücke: {len(druecke)})."
+        )
+    return list(zip(temperaturen, druecke))
+
+
 def _lese_stoffmengenanteile(daten: dict) -> dict:
     if "stoffmengenanteile" in daten:
         return daten["stoffmengenanteile"]
@@ -81,7 +92,7 @@ def _globalisierte_eingabedaten(
         ],
         "startwert_molare_dichte_mol_pro_l": _lese_startdichte(daten),
         "stoffmengenanteile_vor_normierung": _lese_stoffmengenanteile(daten),
-        "anzahl_kombinationen": len(temperaturen) * len(druecke),
+        "anzahl_kombinationen": len(temperaturen),
     }
     if temperatur_einheit == "K":
         eingabedaten["temperatur_K"] = temperaturen
@@ -102,6 +113,7 @@ def main() -> None:
     payload = _lade_eingabe(input_path)
     temperaturen, temperatur_einheit = _lese_temperaturen(payload)
     druecke, druck_einheit = _lese_druecke(payload)
+    temperatur_druck_paare = _temperatur_druck_paare(temperaturen, druecke)
     stoffmengenanteile = _lese_stoffmengenanteile(payload)
     startdichte = _lese_startdichte(payload)
 
@@ -110,35 +122,34 @@ def main() -> None:
         payload, temperaturen, temperatur_einheit, druecke, druck_einheit
     )
 
-    for index, temperatur in enumerate(temperaturen, start=1):
+    for index, (temperatur, druck) in enumerate(temperatur_druck_paare, start=1):
         temperatur_k = _temperatur_nach_kelvin(temperatur, temperatur_einheit)
-        for druck in druecke:
-            druck_kpa = _druck_nach_kpa(druck, druck_einheit)
-            result = calculate_from_inputs(
-                temperature_k=temperatur_k,
-                pressure_kpa=druck_kpa,
-                composition=stoffmengenanteile,
-                initial_density_mol_per_l=startdichte,
-            )
+        druck_kpa = _druck_nach_kpa(druck, druck_einheit)
+        result = calculate_from_inputs(
+            temperature_k=temperatur_k,
+            pressure_kpa=druck_kpa,
+            composition=stoffmengenanteile,
+            initial_density_mol_per_l=startdichte,
+        )
 
-            global_eingabedaten["summe_vor_normierung"] = result["eingabedaten"][
-                "summe_vor_normierung"
-            ]
-            global_eingabedaten["stoffmengenanteile_normiert"] = result["eingabedaten"][
-                "stoffmengenanteile_normiert"
-            ]
+        global_eingabedaten["summe_vor_normierung"] = result["eingabedaten"][
+            "summe_vor_normierung"
+        ]
+        global_eingabedaten["stoffmengenanteile_normiert"] = result["eingabedaten"][
+            "stoffmengenanteile_normiert"
+        ]
 
-            ergebnisse.append(
-                {
-                    "index": len(ergebnisse) + 1,
-                    "temperatur_C": temperatur_k - 273.15,
-                    "druck_bar": druck_kpa / 100.0,
-                    "intern_verwendete_temperatur_K": temperatur_k,
-                    "intern_verwendeter_druck_kPa": druck_kpa,
-                    "ergebnis": result["ergebnis"],
-                    "status": result["status"],
-                }
-            )
+        ergebnisse.append(
+            {
+                "index": index,
+                "temperatur_C": temperatur_k - 273.15,
+                "druck_bar": druck_kpa / 100.0,
+                "intern_verwendete_temperatur_K": temperatur_k,
+                "intern_verwendeter_druck_kPa": druck_kpa,
+                "ergebnis": result["ergebnis"],
+                "status": result["status"],
+            }
+        )
 
     output = {
         "verfahren": "DIN EN ISO 12213-2:2010-01 / AGA8 DETAIL",

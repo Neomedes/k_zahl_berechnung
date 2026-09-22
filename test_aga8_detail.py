@@ -1,6 +1,23 @@
 from __future__ import annotations
 
 from aga8_detail import calculate_from_inputs
+from main import _temperatur_druck_paare
+
+
+def test_temperatur_und_druck_werden_positionsweise_zugeordnet() -> None:
+    assert _temperatur_druck_paare([100.0, 200.0], [10.0, 20.0]) == [
+        (100.0, 10.0),
+        (200.0, 20.0),
+    ]
+
+
+def test_unterschiedlich_viele_temperaturen_und_druecke_werden_abgelehnt() -> None:
+    try:
+        _temperatur_druck_paare([100.0, 200.0], [10.0])
+    except ValueError as exc:
+        assert "gleich viele Werte" in str(exc)
+    else:
+        raise AssertionError("Unterschiedlich lange Eingaben wurden nicht abgelehnt")
 
 
 def test_reference_case() -> None:
