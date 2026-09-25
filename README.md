@@ -55,7 +55,7 @@ Alternativ koennen Temperatur und Druck fuer jede Umgebung mit jeweils eigenen E
 {
   "umgebungen": [
     {"temp_K": 290, "druck_bar": 41},
-    {"temp_C": 15, "druck_kPa": 4.1}
+    {"temp_C": 15, "druck_kPa": 3900}
   ],
   "stoffmengenanteile": {"methan": 100}
 }
