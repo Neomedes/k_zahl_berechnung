@@ -49,6 +49,20 @@ Die Stoffmengenanteile werden automatisch normiert. Das gilt sowohl fuer Anteile
 Temperatur und Druck koennen jetzt direkt in `Grad Celsius` und `bar` angegeben werden; intern rechnet das Programm normkonform mit `K` und `kPa`.
 `temperatur_C` und `druck_bar` duerfen jeweils entweder ein Einzelwert oder ein Array sein. Die beiden Arrays muessen gleich viele Elemente enthalten und werden positionsweise zugeordnet: Die erste Temperatur wird mit dem ersten Druck berechnet, die zweite Temperatur mit dem zweiten Druck usw. Unterschiedlich lange Arrays werden mit einer Fehlermeldung abgelehnt.
 
+Alternativ koennen Temperatur und Druck fuer jede Umgebung mit jeweils eigenen Einheiten angegeben werden. Jede Umgebung muss genau eine der Temperatureigenschaften `temp_K` oder `temp_C` und genau eine der Druckeigenschaften `druck_bar` oder `druck_kPa` enthalten:
+
+```json
+{
+  "umgebungen": [
+    {"temp_K": 290, "druck_bar": 41},
+    {"temp_C": 15, "druck_kPa": 3900}
+  ],
+  "stoffmengenanteile": {"methan": 100}
+}
+```
+
+Die Werte werden je Umgebung nach Kelvin und kPa umgerechnet. Das bisherige Eingabeformat mit globalen Temperatur- und Druckwerten bleibt weiterhin unterstuetzt.
+
 ## Test
 
 ```bash
